@@ -1,147 +1,137 @@
-/* Reset */
+/* Reset & Layout */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
-  }
-  
-  body {
-    display: flex;
-    background-color: #f4f6f9;
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    width: 220px;
-    background-color: #1d3557;
-    color: white;
-    min-height: 100vh;
-    position: fixed;
-    padding-top: 20px;
-  }
-  
-  .sidebar .brand {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 30px;
-    font-weight: bold;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-  }
-  
-  .sidebar ul li {
-    padding: 15px 20px;
-    border-left: 4px solid transparent;
-  }
-  
-  .sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .sidebar ul li:hover,
-  .sidebar ul li.active {
-    background-color: #457b9d;
-    border-left: 4px solid #a8dadc;
-  }
-  
-  /* Main Content */
-  .main {
-    margin-left: 220px;
-    padding: 30px;
-    flex: 1;
-  }
-  
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
-  
-  .toggle {
-    font-size: 20px;
-    cursor: pointer;
-    display: none;
-  }
-  
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
-  
-  .card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    transition: transform 0.2s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card-icon {
-    font-size: 32px;
-    color: #1d3557;
-  }
-  
-  .card-details h3 {
-    font-size: 24px;
-    color: #1d3557;
-  }
-  
-  .card-details p {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  /* Responsive */
-  @media screen and (max-width: 768px) {
-    .sidebar {
-      display: none;
-    }
-  
-    .main {
-      margin-left: 0;
-    }
-  
-    .toggle {
-      display: block;
-    }
-  }
-  /* Sidebar toggle class */
-.sidebar.collapsed {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  display: flex;
+  background-color: #f4f6f9;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #1d3557;
+  color: white;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  z-index: 999;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar .brand {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  padding: 15px 20px;
+  border-left: 4px solid transparent;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background-color: #457b9d;
+  border-left: 4px solid #a8dadc;
+}
+
+/* Main */
+.main {
+  margin-left: 220px;
+  padding: 30px;
+  flex: 1;
+  width: 100%;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  background-color: #f4f6f9;
+  z-index: 100;
+}
+
+.toggle {
+  font-size: 22px;
+  cursor: pointer;
+  color: #1d3557;
   display: none;
 }
 
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  font-size: 32px;
+  color: #1d3557;
+}
+
+.card-details h3 {
+  font-size: 24px;
+  color: #1d3557;
+}
+
+.card-details p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Responsive */
 @media screen and (max-width: 768px) {
   .sidebar {
-    position: absolute;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 220px;
-    transition: transform 0.3s ease-in-out;
     transform: translateX(-100%);
   }
 
   .sidebar.show {
     transform: translateX(0);
-    display: block;
   }
 
   .main {
-    padding: 20px;
+    margin-left: 0;
+  }
+
+  .toggle {
+    display: block;
   }
 }
