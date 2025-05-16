@@ -1,0 +1,82 @@
+body {
+  background: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+nav .nav-pills .nav-link {
+  cursor: pointer;
+  font-weight: 600;
+  color: #444;
+}
+
+nav .nav-pills .nav-link.active {
+  background-color: #28a745;
+  color: white;
+}
+
+.menu-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.menu-card img {
+  max-width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  height: 150px;
+  margin-bottom: 10px;
+}
+
+.menu-card h5 {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.menu-card p {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.menu-card .price {
+  font-weight: 700;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.menu-card .btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cart-sidebar {
+  background: white;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#cartItems .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#cartItems .list-group-item .item-qty {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+#submitOrderBtn:disabled {
+  background-color: #94d3a2;
+  cursor: not-allowed;
+}

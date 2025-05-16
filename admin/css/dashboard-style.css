@@ -77,9 +77,23 @@ body {
   font-size: 22px;
   cursor: pointer;
   color: #1d3557;
-  display: none;
+  display: none; /* Hide by default (desktop) */
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
 }
 
+/* Only show on mobile */
+@media screen and (max-width: 768px) {
+  .toggle {
+    display: block;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+}
 /* Cards */
 .cards {
   display: grid;
