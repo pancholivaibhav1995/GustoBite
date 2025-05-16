@@ -119,4 +119,29 @@
       display: block;
     }
   }
-  
+  /* Sidebar toggle class */
+.sidebar.collapsed {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 220px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+    display: block;
+  }
+
+  .main {
+    padding: 20px;
+  }
+}
