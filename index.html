@@ -18,102 +18,11 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 </head>
 <!-- AOS JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({
-      duration: 800,
-      once: true
-    });
-  });
-
-  // Collapse mobile nav on link click
-  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-  const navbarCollapse = document.querySelector('.navbar-collapse');
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (navbarCollapse.classList.contains('show')) {
-        new bootstrap.Collapse(navbarCollapse).toggle();
-      }
-    });
-  });
-  // Countdown timer function
-  function initializeCountdown(id, endtime) {
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = endtime - now;
-
-      if (distance < 0) {
-        document.getElementById(id).innerHTML = "Event Started!";
-        clearInterval(timer);
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById(id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-    }
-
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-  }
-
-  // Set your event dates here (YYYY-MM-DD)
-  initializeCountdown("countdown1", new Date("2025-06-01T18:00:00").getTime());
-  initializeCountdown("countdown2", new Date("2025-06-15T10:00:00").getTime());
-
-  // Set min date to today for reservation
-  document.addEventListener("DOMContentLoaded", () => {
-    const dateInput = document.getElementById('date');
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
-  });
-
-  document.getElementById('bookingForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const messageDiv = document.getElementById('bookingMessage');
-
-    // Collect form data
-    const name = this.name.value.trim();
-    const email = this.email.value.trim();
-    const phone = this.phone.value.trim();
-    const date = this.date.value;
-    const time = this.time.value;
-    const guests = this.guests.value;
-    const menuItems = [];
-    ['menuBreakfast', 'menuLunch', 'menuDinner', 'menuDrinks'].forEach(id => {
-      if (document.getElementById(id).checked) menuItems.push(document.getElementById(id).value);
-    });
-
-    // Validation
-    if (!name || !email || !phone || !date || !time || !guests) {
-      messageDiv.className = 'alert alert-danger';
-      messageDiv.textContent = 'Please fill all required fields.';
-      messageDiv.classList.remove('d-none');
-      return;
-    }
-
-    // Show success message
-    messageDiv.className = 'alert alert-success';
-    messageDiv.innerHTML = `<strong>Thanks for booking, ${name}!</strong><br>
-  Date: ${date}<br>Time: ${time}<br>Guests: ${guests}<br>Menu Items: ${menuItems.join(', ') || 'None'}`;
-
-    messageDiv.classList.remove('d-none');
-
-    // Reset form after short delay
-    setTimeout(() => {
-      messageDiv.classList.add('d-none');
-      this.reset();
-    }, 7000);
-  });
-</script>
 
 <body>
 
@@ -727,6 +636,99 @@
       </form>
     </div>
   </section>
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+      <div class="section-title text-center mb-5">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Reach out with any questions or to make a reservation.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Contact Info -->
+        <div class="col-md-6">
+          <h4 class="mb-3">Get In Touch</h4>
+          <p><strong>Address:</strong> 123 Green Street, VegCity, Earth</p>
+          <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 234 567 890</a></p>
+          <p><strong>Email:</strong> <a href="mailto:info@gustobite.com">info@gustobite.com</a></p>
+
+          <!-- Embedded Google Map -->
+          <div class="mt-4">
+            <iframe src="https://maps.google.com/maps?q=New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%"
+              height="250" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-md-6">
+          <h4 class="mb-3">Send Us a Message</h4>
+          <form id="contactForm">
+            <div class="mb-3">
+              <label for="contactName" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="contactName" required>
+            </div>
+            <div class="mb-3">
+              <label for="contactEmail" class="form-label">Your Email</label>
+              <input type="email" class="form-control" id="contactEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="contactMessage" class="form-label">Message</label>
+              <textarea class="form-control" id="contactMessage" rows="5" required></textarea>
+            </div>
+            <div id="contactResponse" class="alert d-none mt-2" role="alert"></div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Contact Section -->
+  <!-- ======= Footer Section ======= -->
+  <footer class="footer bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- Brand Info -->
+        <div class="col-md-4">
+          <h4 class="brand-highlight mb-3">GustoBite</h4>
+          <p>Serving delicious vegetarian cuisine with love and passion. Visit us for a healthy, flavorful experience.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-4">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#hero" class="text-white text-decoration-none">Home</a></li>
+            <li><a href="#about" class="text-white text-decoration-none">About</a></li>
+            <li><a href="#menu" class="text-white text-decoration-none">Menu</a></li>
+            <li><a href="#booking" class="text-white text-decoration-none">Booking</a></li>
+            <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Social Media -->
+        <div class="col-md-4">
+          <h5 class="mb-3">Follow Us</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="row mt-4 pt-3 border-top border-secondary">
+        <div class="col text-center">
+          <p class="mb-0">© <span id="currentYear"></span> GustoBite. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer Section -->
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

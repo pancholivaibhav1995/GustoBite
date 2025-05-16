@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - GustoBite</title>
+  <link rel="stylesheet" href="css/dashboard-style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2 class="brand">GustoBite</h2>
+    <ul>
+      <li class="active"><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+      <li><a href="#"><i class="fas fa-calendar-check"></i> Bookings</a></li>
+      <li><a href="#"><i class="fas fa-receipt"></i> Orders</a></li>
+      <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="topbar">
+      <i class="fas fa-bars toggle" id="toggleSidebar"></i>
+      <h1>Dashboard</h1>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="card-details">
+          <h3>120</h3>
+          <p>Total Bookings</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-user-clock"></i></div>
+        <div class="card-details">
+          <h3>15</h3>
+          <p>Pending Approvals</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-utensils"></i></div>
+        <div class="card-details">
+          <h3>85</h3>
+          <p>Total Orders</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-thumbs-up"></i></div>
+        <div class="card-details">
+          <h3>105</h3>
+          <p>Approved Tables</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard-script.js"></script>
+</body>
+</html>
