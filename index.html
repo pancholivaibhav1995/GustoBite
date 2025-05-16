@@ -17,7 +17,7 @@
   <!-- Font Awesome for Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
 </head>
 <!-- AOS JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -39,6 +39,70 @@
         new bootstrap.Collapse(navbarCollapse).toggle();
       }
     });
+  });
+   // Countdown timer function
+   function initializeCountdown(id, endtime) {
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endtime - now;
+
+      if (distance < 0) {
+        document.getElementById(id).innerHTML = "Event Started!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById(id).innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  }
+
+  // Set your event dates here (YYYY-MM-DD)
+  initializeCountdown("countdown1", new Date("2025-06-01T18:00:00").getTime());
+  initializeCountdown("countdown2", new Date("2025-06-15T10:00:00").getTime());
+
+   // Set min date to today for reservation
+   document.addEventListener("DOMContentLoaded", () => {
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+  });
+
+  // Simple form submission handling
+  document.getElementById('bookingForm').addEventListener('submit', function(event){
+    event.preventDefault();
+
+    // Collect form data
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const phone = this.phone.value.trim();
+    const date = this.date.value;
+    const time = this.time.value;
+    const guests = this.guests.value;
+    const menuItems = [];
+    ['menuBreakfast', 'menuLunch', 'menuDinner', 'menuDrinks'].forEach(id => {
+      if (document.getElementById(id).checked) menuItems.push(document.getElementById(id).value);
+    });
+
+    // Basic validation
+    if (!name || !email || !phone || !date || !time || !guests) {
+      alert('Please fill all required fields.');
+      return;
+    }
+
+    // Show booking details (replace with backend integration later)
+    alert(`Thanks for booking, ${name}!\n
+Date: ${date}\nTime: ${time}\nGuests: ${guests}\nMenu Items: ${menuItems.join(', ') || 'None'}`);
+
+    // Reset form
+    this.reset();
   });
 </script>
 
@@ -68,7 +132,7 @@
       <h1 class="display-4 fw-bold mb-3">Welcome to GustoBite</h1>
       <p class="lead mb-4">Fine dining. Exquisite flavors. Unforgettable experiences.</p>
       <a href="#" class="btn btn-primary btn-lg me-2">View Menu</a>
-      <a href="#" class="btn btn-outline-light btn-lg">Book a Table</a>
+      <a href="#booking" class="btn btn-outline-light btn-lg">Book a Table</a>
     </div>
   </header>
 
@@ -377,11 +441,268 @@
       </div>
     </div>
   </section>
+<!-- Team Section -->
+<section id="team" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Meet Our Chefs</h2>
+      <p class="text-muted">Passionate vegetarian chefs crafting delicious meals</p>
+    </div>
+    <div class="row g-4">
+      
+      <!-- Chef 1 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="card border-0 shadow-sm text-center">
+          <img src="images/team/chef1.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Chef Name" style="width: 150px; height: 150px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Chef Anjali Sharma</h5>
+            <p class="card-text text-muted">Head Chef - Expert in North Indian vegetarian cuisine with 15+ years of experience.</p>
+            <div>
+              <a href="#" class="text-primary me-3"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="text-primary me-3"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="text-primary"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Chef 2 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card border-0 shadow-sm text-center">
+          <img src="images/team/chef2.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Chef Name" style="width: 150px; height: 150px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Chef Rahul Mehta</h5>
+            <p class="card-text text-muted">Pastry Chef - Specializes in delicious vegetarian desserts and bakery.</p>
+            <div>
+              <a href="#" class="text-primary me-3"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="text-primary me-3"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="text-primary"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chef 3 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card border-0 shadow-sm text-center">
+          <img src="images/team/chef3.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Chef Name" style="width: 150px; height: 150px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Chef Meera Patel</h5>
+            <p class="card-text text-muted">Sous Chef - Expert in South Indian vegetarian specialties.</p>
+            <div>
+              <a href="#" class="text-primary me-3"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="text-primary me-3"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="text-primary"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section><!-- Testimonials Section -->
+<section id="testimonials" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <p class="text-muted">Real reviews from happy vegetarian food lovers</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Testimonial 1 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="card shadow-sm p-4">
+          <div class="mb-3">
+            <img src="images/testimonials/user1.jpg" alt="Customer 1" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+          </div>
+          <p class="mb-3">"The best vegetarian food I've ever tasted! Fresh ingredients and amazing flavors."</p>
+          <h6 class="mb-0">- Priya Singh</h6>
+          <div class="text-warning mt-2">
+            ★★★★★
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card shadow-sm p-4">
+          <div class="mb-3">
+            <img src="images/testimonials/user2.jpg" alt="Customer 2" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+          </div>
+          <p class="mb-3">"Amazing variety and great ambiance. Perfect spot for vegetarian food lovers."</p>
+          <h6 class="mb-0">- Sameer Khan</h6>
+          <div class="text-warning mt-2">
+            ★★★★☆
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card shadow-sm p-4">
+          <div class="mb-3">
+            <img src="images/testimonials/user3.jpg" alt="Customer 3" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+          </div>
+          <p class="mb-3">"Delicious food and wonderful staff. Highly recommend this place!"</p>
+          <h6 class="mb-0">- Anjali Desai</h6>
+          <div class="text-warning mt-2">
+            ★★★★★
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Gallery Section -->
+<section id="gallery" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Our Delicious Dishes</h2>
+      <p class="text-muted">A visual treat for all vegetarian food lovers</p>
+    </div>
+    <div class="row g-3">
+      <!-- Gallery items -->
+      <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in">
+        <a href="images/gallery/dish1.jpg" data-lightbox="restaurant-gallery" data-title="Paneer Butter Masala">
+          <img src="images/gallery/dish1_thumb.jpg" class="img-fluid rounded" alt="Paneer Butter Masala">
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+        <a href="images/gallery/dish2.jpg" data-lightbox="restaurant-gallery" data-title="Vegetable Biryani">
+          <img src="images/gallery/dish2_thumb.jpg" class="img-fluid rounded" alt="Vegetable Biryani">
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+        <a href="images/gallery/dish3.jpg" data-lightbox="restaurant-gallery" data-title="Masala Dosa">
+          <img src="images/gallery/dish3_thumb.jpg" class="img-fluid rounded" alt="Masala Dosa">
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
+        <a href="images/gallery/dish4.jpg" data-lightbox="restaurant-gallery" data-title="Fresh Vegetable Salad">
+          <img src="images/gallery/dish4_thumb.jpg" class="img-fluid rounded" alt="Fresh Vegetable Salad">
+        </a>
+      </div>
+      <!-- Add more images as needed -->
+    </div>
+  </div>
+</section>
+<!-- Events / Specials Section -->
+<section id="events" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Upcoming Specials & Events</h2>
+      <p class="text-muted">Don’t miss out on our exclusive vegetarian delights and seasonal specials</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Event 1 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="card border-0 shadow-sm text-center p-4">
+          <h5 class="mb-3">Spring Veggie Festival</h5>
+          <p class="mb-3">Celebrate the freshness of spring with our special 5-course vegetarian tasting menu.</p>
+          <div id="countdown1" class="mb-3 fs-5 text-primary"></div>
+          <a href="#booking" class="btn btn-primary">Reserve Your Spot</a>
+        </div>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card border-0 shadow-sm text-center p-4">
+          <h5 class="mb-3">Monthly Cooking Workshop</h5>
+          <p class="mb-3">Learn to cook delicious vegetarian dishes with our head chef, Anjali Sharma.</p>
+          <div id="countdown2" class="mb-3 fs-5 text-primary"></div>
+          <a href="#booking" class="btn btn-primary">Join Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Booking Section -->
+<section id="booking" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Book Your Table</h2>
+      <p class="text-muted">Reserve your spot and select your favorite vegetarian dishes</p>
+    </div>
+
+    <form id="bookingForm" class="mx-auto" style="max-width: 600px;">
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name *</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address *</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number *</label>
+        <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label">Reservation Date *</label>
+        <input type="date" class="form-control" id="date" required min="">
+      </div>
+
+      <div class="mb-3">
+        <label for="time" class="form-label">Time Slot *</label>
+        <select id="time" class="form-select" required>
+          <option value="" disabled selected>Select time slot</option>
+          <option>12:00 PM - 1:00 PM</option>
+          <option>1:00 PM - 2:00 PM</option>
+          <option>6:00 PM - 7:00 PM</option>
+          <option>7:00 PM - 8:00 PM</option>
+          <option>8:00 PM - 9:00 PM</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="guests" class="form-label">Number of Guests *</label>
+        <input type="number" class="form-control" id="guests" min="1" max="20" value="1" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Select Menu Items</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Breakfast" id="menuBreakfast">
+          <label class="form-check-label" for="menuBreakfast">
+            Breakfast Options
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Lunch" id="menuLunch">
+          <label class="form-check-label" for="menuLunch">
+            Lunch Options
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Dinner" id="menuDinner">
+          <label class="form-check-label" for="menuDinner">
+            Dinner Options
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Drinks" id="menuDrinks">
+          <label class="form-check-label" for="menuDrinks">
+            Drinks
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Book Now</button>
+    </form>
+  </div>
+</section>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 </body>
 
 </html>
