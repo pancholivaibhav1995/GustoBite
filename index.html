@@ -75,57 +75,76 @@
     dateInput.setAttribute('min', today);
   });
 
-  // Simple form submission handling
   document.getElementById('bookingForm').addEventListener('submit', function(event){
-    event.preventDefault();
+  event.preventDefault();
 
-    // Collect form data
-    const name = this.name.value.trim();
-    const email = this.email.value.trim();
-    const phone = this.phone.value.trim();
-    const date = this.date.value;
-    const time = this.time.value;
-    const guests = this.guests.value;
-    const menuItems = [];
-    ['menuBreakfast', 'menuLunch', 'menuDinner', 'menuDrinks'].forEach(id => {
-      if (document.getElementById(id).checked) menuItems.push(document.getElementById(id).value);
-    });
+  const messageDiv = document.getElementById('bookingMessage');
 
-    // Basic validation
-    if (!name || !email || !phone || !date || !time || !guests) {
-      alert('Please fill all required fields.');
-      return;
-    }
-
-    // Show booking details (replace with backend integration later)
-    alert(`Thanks for booking, ${name}!\n
-Date: ${date}\nTime: ${time}\nGuests: ${guests}\nMenu Items: ${menuItems.join(', ') || 'None'}`);
-
-    // Reset form
-    this.reset();
+  // Collect form data
+  const name = this.name.value.trim();
+  const email = this.email.value.trim();
+  const phone = this.phone.value.trim();
+  const date = this.date.value;
+  const time = this.time.value;
+  const guests = this.guests.value;
+  const menuItems = [];
+  ['menuBreakfast', 'menuLunch', 'menuDinner', 'menuDrinks'].forEach(id => {
+    if (document.getElementById(id).checked) menuItems.push(document.getElementById(id).value);
   });
+
+  // Validation
+  if (!name || !email || !phone || !date || !time || !guests) {
+    messageDiv.className = 'alert alert-danger';
+    messageDiv.textContent = 'Please fill all required fields.';
+    messageDiv.classList.remove('d-none');
+    return;
+  }
+
+  // Show success message
+  messageDiv.className = 'alert alert-success';
+  messageDiv.innerHTML = `<strong>Thanks for booking, ${name}!</strong><br>
+  Date: ${date}<br>Time: ${time}<br>Guests: ${guests}<br>Menu Items: ${menuItems.join(', ') || 'None'}`;
+
+  messageDiv.classList.remove('d-none');
+
+  // Reset form after short delay
+  setTimeout(() => {
+    messageDiv.classList.add('d-none');
+    this.reset();
+  }, 7000);
+});
 </script>
 
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-transparent">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
-      <a class="navbar-brand fs-3 fw-bold text-white" href="#">GustoBite</a>
+      <a class="navbar-brand brand-highlight" href="#">GustoBite</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link text-white" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">Menu</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto nav-highlight">
+          <li class="nav-item">
+            <a class="nav-link" href="#hero">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#menu">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#booking">Booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
-
   <!-- Hero Section -->
   <header class="hero-section d-flex align-items-center justify-content-center text-center">
     <div class="container text-white">
@@ -695,6 +714,7 @@ Date: ${date}\nTime: ${time}\nGuests: ${guests}\nMenu Items: ${menuItems.join(',
       </div>
 
       <button type="submit" class="btn btn-primary w-100">Book Now</button>
+      <div id="bookingMessage" class="alert d-none mt-3" role="alert"></div>
     </form>
   </div>
 </section>

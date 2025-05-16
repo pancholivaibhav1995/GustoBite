@@ -81,4 +81,59 @@ body, html {
   #features .bi:hover {
     transform: scale(1.1);
   }
+  #menu .card-title {
+    font-weight: 600;
+  }
+  
+  #menu .card-img-top {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    object-fit: cover;
+    height: 200px;
+  }
+  
+  #menu .card:hover {
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+  }
+  /* Main title color */
+.section-title {
+  color: #FF5722; /* Vibrant orange */
+}
+
+/* Navbar menu items color on mobile */
+@media (max-width: 767px) {
+  .navbar-nav .nav-link {
+    color: #FF5722 !important;
+  }
+  .navbar-nav .nav-link:hover {
+    color: #E64A19 !important;
+  }
+}
+/* Brand and Nav Link Highlight Color */
+.brand-highlight {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #FF5722 !important; /* Vibrant Orange */
+}
+
+.nav-highlight .nav-link {
+  color: #FF5722 !important;
+  font-weight: 500;
+}
+
+.nav-highlight .nav-link:hover {
+  color: #E64A19 !important;
+  text-decoration: underline;
+}
+
+/* Optional: Change mobile toggle icon color */
+.navbar-toggler {
+  border-color: #FF5722;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FF5722' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+
   
